@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "14866323659",
+    "project_id": "sharecare-f8231",
+    "storage_bucket": "sharecare-f8231.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14866323659:android:d7c2cafdf509c4e684634e",
+        "android_client_info": {
+          "package_name": "com.darkShadow.share_care"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "14866323659-vc0hipv149mdab4a5ocqofk8f6vnv0o0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.darkShadow.share_care",
+            "certificate_hash": "a983c7b5fc74151926b99c6ed3378fe32ebc1dd6"
+          }
+        },
+        {
+          "client_id": "14866323659-facnd5sgppr0rkqqk8676k3qelg4ksvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeDU2P3Ts_zhlXceJfKN-dleQNvy-0Uaw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14866323659-facnd5sgppr0rkqqk8676k3qelg4ksvq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
