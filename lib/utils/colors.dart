@@ -7,4 +7,7 @@ class  MyColors{
   static const deepBlue3 =  Color(0xff205295);
   static const deepBlue4 =  Color(0xff2C74B3);
   static const backGround =  Color(0xffEEE9DA);
+  static const form1 =  Color(0xff243763);
+  static const submitColor =  Color(0xff24A19C);
+
 }

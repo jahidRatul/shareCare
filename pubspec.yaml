@@ -40,6 +40,9 @@ dependencies:
   firebase_auth: ^4.2.9
   firebase_database: ^10.0.14
   firebase_storage: ^11.0.14
+  image_picker: ^0.8.6+4
+  cached_network_image: ^3.2.3
+  shared_preferences: ^2.0.20
 
   get: ^4.6.5
 

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:share_care/data/models/book_model.dart';
 import 'package:share_care/data/models/user_model.dart';
 import 'package:share_care/data/repositories/home_repo.dart';
 
@@ -12,14 +13,18 @@ class HomeController extends GetxController{
  late String uid;
 
 
+
   @override
   void onInit() {
+    print("Home controller intitalized");
 
     uid =databaseAuthCustom.auth.currentUser?.uid??"";
     if(uid.isNotEmpty){
       getUserInfo(uid);
 
     }
+    getBooks();
+
     super.onInit();
 
   }
@@ -33,5 +38,14 @@ class HomeController extends GetxController{
     print(userModel.university);
 
   }
+  getBooks()async{
+    List<BookModel> bookModelList = await homeRepo.getMyBooks();
+
+    print("books length: ${bookModelList.length}");
+    myBooks =bookModelList;
+    update();
+
+  }
+  List<BookModel> myBooks=[];
 
 }

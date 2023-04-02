@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:share_care/data/data_sources/shared_preferences/shared_preferences_manager.dart';
 import 'package:share_care/domain/use_cases/firebase/database_auth_custom.dart';
 import 'package:share_care/presentation/view/custom_widgets/custom_input_field.dart';
 import 'package:share_care/presentation/view/dashboard/dashboad.dart';
 import 'package:share_care/presentation/view/registration_page/registration_page.dart';
 import 'package:share_care/utils/colors.dart';
 import 'package:share_care/utils/validator/app_validetor.dart';
+
+import '../../../utils/sizes.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -21,6 +24,8 @@ class _LoginPageState extends State<LoginPage> {
 
   DatabaseAuthCustom firebaseAuthCustom = DatabaseAuthCustom();
 
+
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -33,6 +38,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    MySizes.scrX =screenSize.height;
+    MySizes.scrY= screenSize.width;
     return Scaffold(
       backgroundColor: Colors.grey,
       body: SingleChildScrollView(
@@ -111,6 +119,9 @@ class _LoginPageState extends State<LoginPage> {
                                                 password:
                                                     passwordController.text.trim()).then((value) {
                                                       if (value!=null){
+                                                        print(value);
+                                                        SharedPreferencesManager.putString(key: 'userId', value: value);
+
                                                         Navigator.push(context, MaterialPageRoute(builder: (context)=>Dashboard()));
                                                       }
                                             });
