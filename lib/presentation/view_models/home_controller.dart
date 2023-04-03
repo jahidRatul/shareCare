@@ -16,7 +16,7 @@ class HomeController extends GetxController{
 
   @override
   void onInit() {
-    print("Home controller intitalized");
+
 
     uid =databaseAuthCustom.auth.currentUser?.uid??"";
     if(uid.isNotEmpty){

@@ -34,7 +34,7 @@ class _DashboardState extends State<Dashboard> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'My Books',
+            label: 'Requests',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
@@ -54,7 +54,7 @@ class _DashboardState extends State<Dashboard> {
       },
     ),
     Navigator(
-      key: const Key('my books'),
+      key: const Key('requests'),
       onGenerateRoute: (settings) {
         return MaterialPageRoute(builder: (context) => const MyBooksPage());
       },
