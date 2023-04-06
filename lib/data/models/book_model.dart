@@ -1,6 +1,7 @@
 class BookModel {
   String? bookId;
   String? uid;
+  String? owner;
   String? title;
   String? author;
   String? edition;
@@ -10,6 +11,7 @@ class BookModel {
   BookModel(
       {this.uid,
       this.bookId,
+        this.owner,
       this.title,
       this.author,
       this.edition,
@@ -18,13 +20,14 @@ class BookModel {
 
   @override
   String toString() {
-    return 'BookModel{uid: $uid,bookId: $bookId,title: $title, author: $author, edition: $edition, price: $price, imgUrl: $imgUrl}';
+    return 'BookModel{uid: $uid,bookId: $bookId,owner: $owner,title: $title, author: $author, edition: $edition, price: $price, imgUrl: $imgUrl}';
   }
 
   BookModel.fromSnapshot(snapshot)
       :
-        uid = snapshot.key??"",
-        bookId = snapshot.value["bookId"],
+        bookId = snapshot.key??"",
+        uid = snapshot.value["uid"],
+        owner = snapshot.value["owner"],
         title = snapshot.value["title"],
         author = snapshot.value["author"],
         edition = snapshot.value["edition"],

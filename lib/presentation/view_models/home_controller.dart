@@ -12,7 +12,7 @@ class HomeController extends GetxController{
  DatabaseAuthCustom databaseAuthCustom =DatabaseAuthCustom();
  late String uid;
 
-
+  UserModel? userModel;
 
   @override
   void onInit() {
@@ -33,9 +33,9 @@ class HomeController extends GetxController{
 
 
   getUserInfo(uid)async{
-    UserModel userModel = await homeRepo.getUserInfo(uid);
+    userModel = await homeRepo.getUserInfo(uid);
     update();
-    print(userModel.university);
+    print(userModel!.name);
 
   }
   getBooks()async{

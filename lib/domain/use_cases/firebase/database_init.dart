@@ -21,13 +21,14 @@ class DatabaseInit {
   Future addBooks(BookModel bookModel) async {
     databaseReference = database.ref("books/${bookModel.bookId}");
     await databaseReference.set({
-     "bookId": bookModel.bookId,
+
       "uid":bookModel.uid,
       "title": bookModel.title,
       "author":  bookModel.author,
       "edition": bookModel.edition,
       "price": bookModel.price,
-      "imgUrl":  bookModel.imgUrl
+      "imgUrl":  bookModel.imgUrl,
+      "owner":bookModel.owner
 
     });
     return bookModel.title;

@@ -7,6 +7,7 @@ import 'package:share_care/presentation/view/registration_page/registration_page
 import 'package:share_care/utils/colors.dart';
 import 'package:share_care/utils/validator/app_validetor.dart';
 
+import '../../../data/models/user_model.dart';
 import '../../../utils/sizes.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,9 +19,9 @@ class _LoginPageState extends State<LoginPage> {
   final bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
 
-  TextEditingController emailController = TextEditingController(text: "jahid@cns.com");
+  TextEditingController emailController = TextEditingController(text: "nahid@g.com");
 
-  TextEditingController passwordController = TextEditingController(text: "01550155");
+  TextEditingController passwordController = TextEditingController(text: "123123123");
 
   DatabaseAuthCustom firebaseAuthCustom = DatabaseAuthCustom();
 
@@ -118,9 +119,10 @@ class _LoginPageState extends State<LoginPage> {
                                                 email: emailController.text.trim(),
                                                 password:
                                                     passwordController.text.trim()).then((value) {
+
                                                       if (value!=null){
                                                         print(value);
-                                                        SharedPreferencesManager.putString(key: 'userId', value: value);
+
 
                                                         Navigator.push(context, MaterialPageRoute(builder: (context)=>Dashboard()));
                                                       }

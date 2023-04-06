@@ -2,15 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:image_picker/image_picker.dart';
-import 'package:share_care/data/data_sources/shared_preferences/shared_preferences_manager.dart';
 import 'package:share_care/data/models/book_model.dart';
 import 'package:share_care/domain/use_cases/firebase/database_init.dart';
 import 'package:share_care/domain/use_cases/firebase/database_storage_init.dart';
 import 'package:share_care/presentation/view/custom_widgets/books_input_field.dart';
 import 'package:share_care/utils/colors.dart';
 
+import '../../../domain/use_cases/firebase/database_auth_custom.dart';
 import '../../view_models/home_controller.dart';
 
 class AddBooksPage extends StatefulWidget {
@@ -40,9 +39,21 @@ class _AddBooksPageState extends State<AddBooksPage> {
   TextEditingController priceController = TextEditingController();
 
   String? forSale = "free";
-  String userId = SharedPreferencesManager.getString(key: "userId").toString();
+  DatabaseAuthCustom databaseAuthCustom = DatabaseAuthCustom();
+  late String uid;
+  HomeController homeController = Get.find();
 
+  getUserData() async {
+    uid = databaseAuthCustom.auth.currentUser?.uid ?? "";
+    await homeController.getUserInfo(uid);
+  }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    getUserData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +75,6 @@ class _AddBooksPageState extends State<AddBooksPage> {
                       hintText: "books Title",
                       textEditingController: titleController,
                       textCapitalization: TextCapitalization.sentences,
-
                     ),
                     BooksInputField(
                       hintText: "Author Name",
@@ -75,7 +85,6 @@ class _AddBooksPageState extends State<AddBooksPage> {
                       hintText: "Edition",
                       textEditingController: editionController,
                       textCapitalization: TextCapitalization.sentences,
-
                     ),
                     Row(
                       children: [
@@ -178,9 +187,7 @@ class _AddBooksPageState extends State<AddBooksPage> {
                     padding: EdgeInsets.all(10),
                     backgroundColor: MyColors.submitColor),
                 //if user click this button. user can upload image from camera
-                onPressed: () async{
-                  print("user id : $userId");
-
+                onPressed: () {
                   if (image != null) {
                     String bookID = "";
                     DatabaseInit firebaseDaTABASE = DatabaseInit();
@@ -188,30 +195,25 @@ class _AddBooksPageState extends State<AddBooksPage> {
 
                     FireBaseStorageInit fireStorage = FireBaseStorageInit();
                     File file = File(image!.path);
-                    fireStorage.uploadPhoto(file, bookID).then((value) {
+                    fireStorage.uploadPhoto(file, bookID).then((value) async {
                       String? photoSubmittedUrl = value;
                       BookModel bookModel = BookModel(
-                        uid: userId,
+                        uid: homeController?.userModel?.uId,
                         title: titleController.text.trim(),
                         author: authorController.text.trim(),
                         edition: editionController.text.trim(),
                         price: priceController.text.trim(),
                         bookId: bookID,
                         imgUrl: photoSubmittedUrl,
+                        owner: homeController?.userModel?.name,
                       );
                       firebaseDaTABASE.addBooks(bookModel);
-                      HomeController homeController =Get.find();
-                      homeController.getBooks();
+                      await homeController.getBooks();
                       Navigator.pop(context);
-
 
                       print("IMG url: $photoSubmittedUrl bookId: $bookID");
                     });
-
-
-
                   }
-
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

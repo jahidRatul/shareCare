@@ -7,8 +7,10 @@ class MyBooksWidget extends StatelessWidget {
   final String? title;
   final String? author;
   final String? edition;
+  final String? owner;
+  final String? price;
 
-  MyBooksWidget({this.title, this.author, this.imgUrl, this.edition});
+  MyBooksWidget({this.title, this.author, this.imgUrl, this.edition,this.owner,this.price});
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +28,49 @@ class MyBooksWidget extends StatelessWidget {
           ),
           Expanded(
             child: ListTile(
-              title: Text(title ?? "Title"),
+              title: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text( "Title  : "),
+                  Expanded(child: Text( author??"Title")),
+                ],
+              ),
               subtitle: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(author ?? "Author"),
-                  Text(edition ?? "Edition"),
+                children:[
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Author : "),
+                    Expanded(child: Text( author??"Author")),
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text( "Edition: "),
+                    Expanded(child: Text(edition ?? "Edition"),),
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text( "Owner  : "),
+                    Expanded(child: Text(owner ?? "Owner"),),
+                  ],
+                ),
+
+                  price!=""?
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text( "price  : "),
+                      Expanded(child: Text(price ?? "Price"),),
+                    ],
+                  ):Text( "Free"),
+
+
                 ],
               ),
             ),
